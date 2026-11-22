@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M.O שירותי מנעולנות – מוקאפ דף בית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --bg2:#141416; --card:#18181b; --line:#2a2a2e;
+    --text:#f2f2f3; --muted:#a6a6ad;
+    --gold:#d4a843; --gold2:#f3d27a; --gold-dark:#9c7526;
+    --silver1:#ffffff; --silver2:#b9bcc2;
+    --wa:#25d366; --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Heebo,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1160px;margin-inline:auto;padding-inline:20px}
+  .gold-text{background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,var(--gold-dark));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .silver-text{background:linear-gradient(180deg,var(--silver1),var(--silver2) 60%,#8a8d93);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:999px;padding:14px 26px;font-size:1.05rem;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+  .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#111;box-shadow:0 6px 24px rgba(212,168,67,.3)}
+  .btn-wa{background:var(--wa);color:#05290f}
+  .btn-ghost{border:1px solid var(--line);color:var(--text)}
+  .ico{width:22px;height:22px;flex:none}
+  .mock-note{background:#3a2c07;color:var(--gold2);text-align:center;font-size:.85rem;padding:6px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(11,11,12,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-mark{font-weight:900;font-size:1.9rem;letter-spacing:-.5px;line-height:1}
+  .logo-sub{font-size:.8rem;color:var(--muted);font-weight:500;line-height:1.1}
+  nav ul{display:flex;gap:26px;list-style:none;padding:0;font-weight:500;color:var(--muted)}
+  nav a:hover{color:var(--gold2)}
+  .hdr-phone{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.15rem;color:var(--gold2)}
+  .hdr-phone span{direction:ltr}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;padding:72px 0 80px;background:
+     radial-gradient(800px 400px at 85% 0%,rgba(212,168,67,.16),transparent 60%),
+     radial-gradient(600px 400px at 0% 100%,rgba(255,255,255,.05),transparent 60%)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,168,67,.4);color:var(--gold2);border-radius:999px;padding:6px 14px;font-size:.9rem;font-weight:500;margin-bottom:20px}
+  h1{font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.1;font-weight:900;margin-bottom:18px}
+  .lead{color:var(--muted);font-size:1.2rem;max-width:34ch;margin-bottom:30px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-photo{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(212,168,67,.35);aspect-ratio:4/5;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{position:absolute;bottom:16px;inset-inline:16px;background:rgba(11,11,12,.85);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.95rem}
+  .hero-badge b{color:var(--gold2)}
+
+  /* trust */
+  .trust{border-block:1px solid var(--line);background:var(--bg2)}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .trust-item{display:flex;align-items:center;gap:14px;padding:24px 18px}
+  .trust-item + .trust-item{border-inline-start:1px solid var(--line)}
+  .trust-item .ico{width:34px;height:34px;color:var(--gold)}
+  .trust-item b{display:block;font-size:1.05rem}
+  .trust-item small{color:var(--muted);font-size:.88rem}
+
+  section{padding:84px 0}
+  .sec-head{text-align:center;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.2}
+  .sec-head p{color:var(--muted);margin-top:10px;font-size:1.1rem}
+  .divider{width:70px;height:3px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;gap:12px}
+  .svc:hover{border-color:rgba(212,168,67,.6);transform:translateY(-3px)}
+  .svc-ico{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--gold);background:radial-gradient(circle at 50% 30%,rgba(243,210,122,.18),transparent 70%);color:var(--gold2)}
+  .svc-ico svg{width:26px;height:26px}
+  .svc h3{font-size:1.15rem;font-weight:700}
+  .svc p{color:var(--muted);font-size:.93rem}
+  .svc .more{margin-top:auto;color:var(--gold2);font-weight:500;font-size:.9rem}
+
+  /* elock */
+  .elock{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+  .elock-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+  .elock-photo{border-radius:24px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/4}
+  .elock-photo img{width:100%;height:100%;object-fit:cover}
+  .elock h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.2;margin-bottom:14px}
+  .elock .lead{max-width:none}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 30px;padding:0;list-style:none}
+  .feat li{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .feat .ico{color:var(--gold);margin-top:2px}
+
+  /* areas */
+  .areas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:900px;margin-inline:auto}
+  .areas li{list-style:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 18px;font-weight:500}
+
+  /* reviews */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .rev{background:var(--card);border:1px dashed #555;border-radius:var(--radius);padding:24px;min-height:180px;display:flex;flex-direction:column;gap:10px}
+  .stars{color:var(--gold2);letter-spacing:3px}
+  .placeholder{color:#e7b94a;font-size:.9rem;background:rgba(212,168,67,.1);border-radius:8px;padding:4px 8px;align-self:flex-start}
+
+  /* faq */
+  .faq{max-width:800px;margin-inline:auto;display:flex;flex-direction:column;gap:10px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+  summary{cursor:pointer;font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::after{content:"+";color:var(--gold2);font-size:1.4rem;line-height:1}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--muted);margin-top:10px}
+
+  /* contact */
+  .contact{background:var(--bg2);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .contact h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.2;margin-bottom:12px}
+  .big-phone{display:inline-flex;align-items:center;gap:12px;font-size:clamp(2rem,4.5vw,3rem);font-weight:900;margin:18px 0 24px;direction:ltr}
+  .big-phone .ico{width:40px;height:40px;color:var(--gold)}
+  form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;display:grid;gap:16px}
+  label{display:grid;gap:6px;font-weight:500;font-size:.95rem}
+  input,textarea,select{font:inherit;color:var(--text);background:#0f0f11;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  textarea{min-height:100px;resize:vertical}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.85rem;color:var(--muted)}
+  .consent input{margin-top:4px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 110px;color:var(--muted);font-size:.9rem}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+  .foot a:hover{color:var(--gold2)}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap}
+
+  /* mobile bar */
+  .mbar{display:none}
+  @media (max-width:960px){
+    nav{display:none}
+    .hero-grid,.elock-grid,.contact-grid{grid-template-columns:1fr}
+    .hero{padding:40px 0 56px}
+    .hero-photo{aspect-ratio:16/11;order:-1}
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .trust-grid{grid-template-columns:repeat(2,1fr)}
+    .trust-item:nth-child(3){border-inline-start:0}
+    .trust-item:nth-child(n+3){border-top:1px solid var(--line)}
+    .rev-grid{grid-template-columns:1fr}
+    .elock-photo{aspect-ratio:16/12}
+    section{padding:60px 0}
+    .mbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;bottom:0;inset-inline:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(11,11,12,.95);border-top:1px solid var(--line);z-index:30}
+    .mbar .btn{justify-content:center;padding:13px}
+  }
+  @media (max-width:560px){
+    .hdr-phone span{display:none}
+    .svc-grid{grid-template-columns:1fr}
+    .feat{grid-template-columns:1fr}
+    .trust-item{padding:18px 12px;gap:10px}
+    .cta-row .btn{flex:1;justify-content:center}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v19"/><path d="M2 22h20"/><circle cx="15" cy="12" r="1"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/></symbol>
+    <symbol id="i-finger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a2 2 0 0 0-2 2c0 1 0 3.5-1 6"/><path d="M14 13.1c0 2.4 0 4.9-.8 7"/><path d="M17.3 19.7c.2-1.2.6-3.7.7-5.7"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M5 19.5c.5-1.5 1-4 1-7.5a6 6 0 0 1 .3-2"/><path d="M8.6 22c.2-.7.5-1.4.6-2.1"/><path d="M9 6.8A6 6 0 0 1 18 12v2"/><path d="M21.8 16c.2-2 .1-5.5 0-6"/></symbol>
+    <symbol id="i-cyl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><path d="M13 12h9M18 12v3M21 12v2"/><path d="M8 10v4"/></symbol>
+    <symbol id="i-mech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M18 9h3M18 15h3"/><circle cx="12" cy="9" r="1.5"/><path d="M12 13v4"/></symbol>
+    <symbol id="i-handle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="3" width="5" height="18" rx="2.5"/><path d="M17.5 8H5a2 2 0 0 0 0 4h1"/><circle cx="17.5" cy="16" r="1"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-keypad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h0M12 7h0M15 7h0M9 11h0M12 11h0M15 11h0M9 15h0M12 15h0M15 15h0" stroke-width="2.6"/></symbol>
+    <symbol id="i-magnet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15-4-4 6.8-6.8a5.7 5.7 0 0 1 8 8L10 19l-4-4 6.9-6.9a1 1 0 0 0-1.4-1.4z"/><path d="m5 8 4 4M12 15l4 4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+    <symbol id="i-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V3h11v19"/><path d="M2 22h20"/><path d="M7 12h12M19 10v4"/></symbol>
+    <symbol id="i-safe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="17" rx="2"/><circle cx="12" cy="11.5" r="3.5"/><path d="M12 8v1M12 14v1M15.5 11.5h-1M9.5 11.5h-1M6 20v2M18 20v2"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01" stroke-width="2.4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+  </defs>
+</svg>
+
+<div class="mock-note">מוקאפ לאישור כיוון עיצובי · טקסטים זמניים · לוגו זמני עד קבלת הקובץ</div>
+
+<a href="#main" class="btn btn-gold" style="position:absolute;inset-inline-start:-9999px" onfocus="this.style.insetInlineStart='12px'" onblur="this.style.insetInlineStart='-9999px'">דילוג לתוכן</a>
+
+<header>
+  <div class="wrap hdr">
+    <a href="#" class="logo" aria-label="M.O שירותי מנעולנות – דף הבית">
+      <svg class="ico" style="width:34px;height:34px;color:var(--gold)" aria-hidden="true"><use href="#i-key"/></svg>
+      <span>
+        <span class="logo-mark silver-text" style="direction:ltr;display:block">M.O</span>
+        <span class="logo-sub">שירותי מנעולנות</span>
+      </span>
+    </a>
+    <nav aria-label="ראשי">
+      <ul>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#elock">מנעולים חכמים</a></li>
+        <li><a href="#reviews">המלצות</a></li>
+        <li><a href="#faq">שאלות ותשובות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+    <a class="hdr-phone" href="tel:0508842062" aria-label="התקשרו 050-8842062">
+      <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>050-8842062</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><svg class="ico" style="width:18px;height:18px" aria-hidden="true"><use href="#i-award"/></svg> מנעולן מוסמך · מתקין רשמי elock</span>
+        <h1><span class="silver-text">מנעולן מוסמך</span><br><span class="gold-text">ביבנה, אשדוד, רחובות והסביבה</span></h1>
+        <p class="lead">פריצת דלתות ורכבים, החלפת צילינדרים, התקנת מנעולים חכמים, קודנים ועיניות. עבודה מקצועית, מחיר הוגן ואחריות לשנה על ההתקנה.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold" href="tel:0508842062"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> התקשרו עכשיו</a>
+          <a class="btn btn-wa" href="https://wa.me/972508842062"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> שלחו וואטסאפ</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="../../assets/from-client/smart-lock-installed.png" alt="מנעול חכם עם טביעת אצבע וקודן, מותקן על דלת">
+        <div class="hero-badge"><svg class="ico" style="color:var(--gold)" aria-hidden="true"><use href="#i-shield"/></svg><span><b>אחריות שנה</b> על כל התקנה</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap trust-grid">
+      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-award"/></svg><div><b>מנעולן מוסמך</b><small>תעודה מקצועית</small></div></div>
+      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-finger"/></svg><div><b>מתקין רשמי elock</b><small>מנעולים חכמים</small></div></div>
+      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><div><b>אחריות שנה</b><small>על ההתקנה</small></div></div>
+      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg><div><b>מחיר הוגן</b><small>הצעה ברורה מראש</small></div></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="gold-text">השירותים שלנו</span></h2>
+        <p>לבתים פרטיים, ועדי בתים, קבלנים ובתי עסק</p>
+        <div class="divider"></div>
+      </div>
+      <div class="svc-grid">
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-door"/></svg></span><h3>פריצת דלתות</h3><p>ננעלתם בחוץ? פתיחת דלת מקצועית, בלי נזק מיותר.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-car"/></svg></span><h3>פריצת רכבים</h3><p>מפתח נשאר בפנים? פותחים את הרכב במהירות ובזהירות.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-finger"/></svg></span><h3>מנעולים חכמים</h3><p>התקנת מנעולי elock: טביעת אצבע, קוד ואפליקציה.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-cyl"/></svg></span><h3>החלפת צילינדר</h3><p>צילינדר חדש ובטוח לדלת הכניסה, כולל התאמה לדלת.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-mech"/></svg></span><h3>מנעול ומנגנון לדלת</h3><p>החלפה ותיקון של מנעולים ומנגנונים לכל סוגי הדלתות.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-handle"/></svg></span><h3>ידיות לדלתות</h3><p>התקנה והחלפה של ידיות לפלדלת, דלתות פנים וזכוכית.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-eye"/></svg></span><h3>עינית לדלת</h3><p>עינית רגילה או עינית חכמה עם מסך ומצלמה.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-keypad"/></svg></span><h3>קודנים</h3><p>התקנה ותיקון של קודנים לבתים, בניינים ועסקים.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-magnet"/></svg></span><h3>אלקטרו־מגנט</h3><p>התקנה ותיקון של מנעולי אלקטרו־מגנט לדלתות כניסה.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span><h3>מנעול חשמלי</h3><p>מנעולים חשמליים לשערים, לובאים ובתי עסק.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-exit"/></svg></span><h3>ידיות ודלתות בהלה</h3><p>פתרונות יציאת חירום לבתי עסק ומבני ציבור.</p><span class="more">לפרטים ←</span></a>
+        <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-safe"/></svg></span><h3>מנעול כספת</h3><p>פתיחה, תיקון והחלפה של מנעולי כספות.</p><span class="more">לפרטים ←</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="elock" class="elock">
+    <div class="wrap elock-grid">
+      <div class="elock-photo"><img src="../../assets/from-client/smart-lock-installed.png" alt="מנעול חכם elock מותקן על דלת לבנה" loading="lazy"></div>
+      <div>
+        <span class="eyebrow">מתקין רשמי elock</span>
+        <h2><span class="silver-text">מנעול חכם.</span> <span class="gold-text">בלי מפתחות, בלי דאגות.</span></h2>
+        <p class="lead">פותחים את הדלת בטביעת אצבע, בקוד, בכרטיס או מהטלפון, ונותנים גישה זמנית לאורחים ולבעלי מקצוע. התקנה מקצועית של דגמי elock Wiz ו־Pro.</p>
+        <ul class="feat">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>טביעת אצבע, קוד ומפתח גיבוי</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>שליטה וקודים זמניים מהאפליקציה</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>התראה לפני שהסוללה נגמרת</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>מתאים לרוב דלתות הפלדלת</span></li>
+        </ul>
+        <a class="btn btn-gold" href="#contact">הזמינו התקנה</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="gold-text">אזורי שירות</span></h2>
+        <p>מגיעים אליכם בכל האזור</p>
+        <div class="divider"></div>
+      </div>
+      <ul class="areas">
+        <li>יבנה</li><li>אשדוד</li><li>רחובות</li><li>נס ציונה</li><li>ראשון לציון</li><li>גדרה</li><li>יישובי גדרות</li><li>מזכרת בתיה</li><li>קריית עקרון</li><li>בני דרום</li><li>פלמחים</li><li>גאליה</li><li>כפר הנגיד</li><li>בית עובד</li><li>גבעת וושינגטון</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="reviews" style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="gold-text">לקוחות ממליצים</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="rev-grid">
+        <div class="rev"><span class="stars" aria-label="5 כוכבים">★★★★★</span><span class="placeholder">[חסר: צילום מסך של המלצה]</span></div>
+        <div class="rev"><span class="stars" aria-label="5 כוכבים">★★★★★</span><span class="placeholder">[חסר: צילום מסך של המלצה]</span></div>
+        <div class="rev"><span class="stars" aria-label="5 כוכבים">★★★★★</span><span class="placeholder">[חסר: צילום מסך של המלצה]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="gold-text">שאלות נפוצות</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="faq">
+        <details><summary>כמה עולה פריצת דלת או החלפת צילינדר?</summary><p>המחיר תלוי בסוג הדלת והמנעול. התקשרו או שלחו תמונה בוואטסאפ ותקבלו הצעת מחיר ברורה מראש.</p></details>
+        <details><summary>מה קורה במנעול חכם כשהסוללה נגמרת?</summary><p>המנעול מתריע מראש כשהסוללה חלשה, ויש מפתח גיבוי ואפשרות להזנת מתח חיצונית לפתיחה.</p></details>
+        <details><summary>האם יש אחריות על העבודה?</summary><p>כן, אחריות לשנה על כל התקנה.</p></details>
+        <details><summary>האם אתם עובדים גם עם בתי עסק וועדי בתים?</summary><p>כן. מתקינים ומתקנים קודנים, אלקטרו־מגנט, מנעולים חשמליים ודלתות בהלה לבניינים ולעסקים.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2><span class="silver-text">צריכים מנעולן?</span><br><span class="gold-text">דברו איתנו</span></h2>
+        <p class="lead">הכי מהיר: שיחה או וואטסאפ. אפשר גם להשאיר פרטים ונחזור אליכם.</p>
+        <a class="big-phone gold-text" href="tel:0508842062"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>050-8842062</a>
+        <div class="cta-row">
+          <a class="btn btn-wa" href="https://wa.me/972508842062"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> וואטסאפ</a>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault();alert('מוקאפ – הטופס יחובר בבנייה')">
+        <label>שם מלא<input name="name" autocomplete="name" required></label>
+        <label>טלפון<input name="phone" type="tel" autocomplete="tel" dir="ltr" style="text-align:end" required></label>
+        <label>סוג השירות
+          <select name="service">
+            <option>פריצת דלת</option><option>פריצת רכב</option><option>מנעול חכם</option><option>החלפת צילינדר</option><option>קודן / אלקטרו־מגנט</option><option>אחר</option>
+          </select>
+        </label>
+        <label>עיר<input name="city" autocomplete="address-level2"></label>
+        <label>פרטים נוספים<textarea name="msg"></textarea></label>
+        <label class="consent"><input type="checkbox" required> אני מסכים/ה שפרטיי ישמשו לחזרה אליי בלבד, בהתאם למדיניות הפרטיות.</label>
+        <button class="btn btn-gold" type="submit" style="border:0;justify-content:center;cursor:pointer;font-family:inherit">שליחה</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>© M.O שירותי מנעולנות · מנעולן מוסמך · 050-8842062</div>
+    <div class="foot-links"><a href="#">הצהרת נגישות</a><a href="#">מדיניות פרטיות</a><a href="#">כל השירותים</a></div>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-gold" href="tel:0508842062"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> התקשרו</a>
+  <a class="btn btn-wa" href="https://wa.me/972508842062"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> וואטסאפ</a>
+</div>
+
+</body>
+</html>
