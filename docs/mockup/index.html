@@ -35,7 +35,7 @@
   header{position:sticky;top:0;z-index:20;background:rgba(11,11,12,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
   .logo{display:flex;align-items:center;gap:10px}
-  .logo-mark{font-weight:900;font-size:1.9rem;letter-spacing:-.5px;line-height:1}
+  .logo-svg{height:44px;width:auto;color:var(--text)}
   nav ul{display:flex;gap:26px;list-style:none;padding:0;font-weight:500;color:var(--muted)}
   nav a:hover{color:var(--gold2)}
   .hdr-tag{font-weight:700;font-size:1.1rem;color:var(--gold2);white-space:nowrap}
@@ -156,7 +156,7 @@
     .svc-grid{grid-template-columns:1fr}
     .feat{grid-template-columns:1fr}
     .trust-item{padding:18px 12px;gap:10px}
-    .cta-row .btn{flex:1;justify-content:center}
+    .cta-row .btn{flex:1;justify-content:center;padding-inline:14px;white-space:nowrap}
     .hero-svc{grid-template-columns:1fr}
     .hdr-tag{font-size:1rem}
   }
@@ -191,15 +191,22 @@
   </defs>
 </svg>
 
-<div class="mock-note">מוקאפ לאישור כיוון עיצובי · טקסטים זמניים · לוגו זמני עד קבלת הקובץ</div>
+<div class="mock-note">מוקאפ לאישור כיוון עיצובי · טקסטים זמניים · הלוגו שורטט מחדש מצילום מסך</div>
 
 <a href="#main" class="btn btn-gold" style="position:absolute;inset-inline-start:-9999px" onfocus="this.style.insetInlineStart='12px'" onblur="this.style.insetInlineStart='-9999px'">דילוג לתוכן</a>
 
 <header>
   <div class="wrap hdr">
     <a href="#" class="logo" aria-label="M.O שירותי מנעולנות – דף הבית">
-      <svg class="ico" style="width:34px;height:34px;color:var(--gold)" aria-hidden="true"><use href="#i-key"/></svg>
-      <span class="logo-mark silver-text" style="direction:ltr">M.O</span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 870 395" fill="currentColor" class="logo-svg" aria-hidden="true">
+  <path fill-rule="evenodd" d="M99 7a99 92 0 1 1 0 184a99 92 0 1 1 0-184zM100 35a26 25 0 1 0 0 50a26 25 0 1 0 0-50z"/>
+  <mask id="mo-groove"><rect width="870" height="395" fill="#fff"/><path d="M80 195v185" stroke="#000" stroke-width="5"/></mask>
+  <path mask="url(#mo-groove)" d="M58 150h84v80l-14 11 14 11-14 11 14 11-14 11 14 11-14 11 14 11-14 11 14 11v52H75l-17-17z"/>
+  <path d="M168 110h68l52 95 52-95v54l-70 128z"/>
+  <rect x="340" y="110" width="65" height="282"/>
+  <circle cx="492" cy="350" r="42"/>
+  <path fill-rule="evenodd" d="M718 110a147 141 0 1 1 0 282a147 141 0 1 1 0-282zM718 164a85 87 0 1 0 0 174a85 87 0 1 0 0-174z"/>
+</svg>
     </a>
     <nav aria-label="ראשי">
       <ul>

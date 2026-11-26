@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 870 395" fill="currentColor" role="img" aria-label="M.O">
+  <!-- Redrawn from the client's logo (WhatsApp screenshot); replace if a source file arrives -->
+  <!-- key bow with hole -->
+  <path fill-rule="evenodd" d="M99 7a99 92 0 1 1 0 184a99 92 0 1 1 0-184zM100 35a26 25 0 1 0 0 50a26 25 0 1 0 0-50z"/>
+  <!-- key shaft = left leg of M, teeth on the inner edge -->
+  <mask id="mo-groove"><rect width="870" height="395" fill="#fff"/><path d="M80 195v185" stroke="#000" stroke-width="5"/></mask>
+  <path mask="url(#mo-groove)" d="M58 150h84v80l-14 11 14 11-14 11 14 11-14 11 14 11-14 11 14 11-14 11 14 11v52H75l-17-17z"/>
+  <!-- M: middle V and right leg -->
+  <path d="M168 110h68l52 95 52-95v54l-70 128z"/>
+  <rect x="340" y="110" width="65" height="282"/>
+  <!-- dot -->
+  <circle cx="492" cy="350" r="42"/>
+  <!-- O -->
+  <path fill-rule="evenodd" d="M718 110a147 141 0 1 1 0 282a147 141 0 1 1 0-282zM718 164a85 87 0 1 0 0 174a85 87 0 1 0 0-174z"/>
+</svg>
