@@ -18,13 +18,15 @@ Stage 7 (build, by milestones). Plan approved 2026-11-26. Client changes from he
 ```
 src/
   layouts/BaseLayout.astro   # html lang=he dir=rtl, SEO meta, JSON-LD, header, footer, mobile call bar
-  components/                # Header, Footer, MobileCallBar, CtaButtons, ContactForm, SectionHead, Icon, Logo, Missing
-  data/site.ts               # phone, WhatsApp, areas, services, lock types, FAQ (single source)
-  pages/                     # index, thanks, 404, robots.txt.ts (more in milestones 2–3)
+  components/                # Header (with <details> mobile menu), Footer, MobileCallBar, CtaButtons, ContactForm, SectionHead, Icon, Logo, Missing
+  data/site.ts               # phone, WhatsApp, areas, service cards, lock types, FAQ (single source)
+  content/services/*.md      # one file per service page -> /services/<id>/ (schema: src/content.config.ts)
+  pages/                     # index, services/[id], accessibility, privacy, thanks, 404, robots.txt.ts
   styles/global.css          # Tailwind + @theme tokens
   assets/images/, assets/logo/
 scripts/prepare-images.mjs   # crop/resize raw client photos into src/assets/images
 scripts/check-links.mjs      # post-build internal link + anchor check
+public/                      # favicon.svg, videos/ (served as-is)
 assets/from-client/          # raw client files, local only (git-ignored, repo is public)
 docs/                        # plan, client docs, mockups, architecture (not deployed)
 ```

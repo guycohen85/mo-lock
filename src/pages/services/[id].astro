@@ -1,0 +1,131 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+import Missing from '../../components/Missing.astro';
+import Icon from '../../components/Icon.astro';
+import { site, services as cards } from '../../data/site';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('services');
+  return pages.map((page) => ({ params: { id: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const d = page.data;
+const poster = d.video ? (await getImage({ src: d.video.poster, width: 640, format: 'webp' })).src : undefined;
+const icon = cards.find((c) => c.slug === d.cards[0])?.icon ?? 'door';
+const others = (await getCollection('services'))
+  .filter((p) => p.id !== page.id)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: d.title,
+  description: d.description,
+  areaServed: site.region,
+  provider: { '@type': 'Locksmith', name: site.name, telephone: site.phoneE164, url: new URL('/', Astro.site).href },
+};
+---
+<BaseLayout title={d.seoTitle} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="border-b border-line bg-[radial-gradient(800px_400px_at_85%_0%,oklch(75.3%_0.127_85/0.14),transparent_60%)] py-10 lg:py-16">
+    <div class="mx-auto max-w-site px-5">
+      <nav aria-label="פירורי לחם" class="mb-6 text-sm text-muted">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="hover:text-gold-light" href="/">דף הבית</a> <span aria-hidden="true">›</span></li>
+          <li><a class="hover:text-gold-light" href="/#services">שירותים</a> <span aria-hidden="true">›</span></li>
+          <li aria-current="page" class="text-text">{d.title}</li>
+        </ol>
+      </nav>
+      <div class="flex items-start gap-4">
+        <span class="mt-1 grid size-13 shrink-0 place-items-center rounded-full border-[1.5px] border-gold text-gold-light max-sm:hidden">
+          <Icon name={icon} class="size-6.5" />
+        </span>
+        <div>
+          <h1 class="mb-4 text-display font-black">
+            <span class="text-silver">{d.title}</span><br /><span class="text-gold">בכל אזור {site.region}</span>
+          </h1>
+          <p class="mb-7 max-w-[60ch] text-lg text-muted">{d.lead}</p>
+          <CtaButtons />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto grid max-w-site gap-12 px-5 py-12 lg:grid-cols-[1fr_20rem] lg:py-16">
+    <article class="prose-site">
+      <Content />
+      {d.missing.length > 0 && (
+        <ul class="not-prose mt-8 flex flex-col gap-2">
+          {d.missing.map((m) => <li><Missing what={m} /></li>)}
+        </ul>
+      )}
+
+      {d.photos.length > 0 && (
+        <div class="not-prose mt-10">
+          <h2 class="mb-4 text-2xl font-black text-gold">מהעבודות</h2>
+          <ul class="grid grid-cols-2 gap-3 md:gap-4">
+            {d.photos.map((p) => {
+              // Square tiles; only panoramic photos (e.g. a cylinder) span the row at their own ratio.
+              const wide = p.src.width > p.src.height * 1.8;
+              return (
+              <li class:list={[wide && 'col-span-2']}>
+                <figure class="overflow-hidden rounded-card border border-line bg-card">
+                  <Image src={p.src} alt={p.alt} widths={wide ? [640, 1100] : [320, 640]} sizes={wide ? '(min-width: 1024px) 760px, 100vw' : '(min-width: 1024px) 380px, 50vw'} class:list={['w-full object-cover', !wide && 'aspect-square']} />
+                  <figcaption class="px-3 py-2.5 text-sm font-medium">{p.caption}</figcaption>
+                </figure>
+              </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
+      {d.video && (
+        <figure class="not-prose mt-8 overflow-hidden rounded-card border border-line bg-card">
+          <video class="mx-auto max-h-[70vh] w-auto" controls preload="none" playsinline poster={poster}>
+            <source src={d.video.src} type="video/mp4" />
+          </video>
+          <figcaption class="px-3 py-2.5 text-sm font-medium">{d.video.caption}</figcaption>
+        </figure>
+      )}
+
+      {d.faqs.length > 0 && (
+        <div class="not-prose mt-10">
+          <h2 class="mb-4 text-2xl font-black text-gold">שאלות נפוצות</h2>
+          <div class="flex flex-col gap-2.5">
+            {d.faqs.map((f) => (
+              <details class="group rounded-xl border border-line bg-card px-5 py-4">
+                <summary class="flex cursor-pointer list-none justify-between gap-3 font-bold [&::-webkit-details-marker]:hidden">
+                  {f.q}<span class="text-2xl leading-none text-gold-light group-open:hidden" aria-hidden="true">+</span><span class="hidden text-2xl leading-none text-gold-light group-open:inline" aria-hidden="true">−</span>
+                </summary>
+                <p class="mt-2.5 text-muted">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+    </article>
+
+    <aside class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+      <div class="rounded-card border border-gold/40 bg-card p-6">
+        <p class="mb-1 text-xl font-black">צריכים {d.title}?</p>
+        <p class="mb-4 text-muted">התקשרו או שלחו תמונה בוואטסאפ, ותקבלו הצעת מחיר.</p>
+        <a class="mb-4 inline-flex items-center gap-2 text-2xl font-black text-gold" href={site.phoneHref} dir="ltr"><Icon name="phone" class="size-6" />{site.phoneDisplay}</a>
+        <CtaButtons short class="[&>a]:flex-1" />
+        <p class="mt-4 text-sm text-muted"><a class="underline hover:text-gold-light" href="/#contact">או השאירו פרטים בטופס</a></p>
+      </div>
+      <nav aria-label="שירותים נוספים" class="rounded-card border border-line bg-card p-6">
+        <p class="mb-3 font-bold">שירותים נוספים</p>
+        <ul class="flex flex-col gap-2 text-muted">
+          {others.map((o) => <li><a class="hover:text-gold-light" href={`/services/${o.id}/`}>{o.data.title}</a></li>)}
+        </ul>
+      </nav>
+    </aside>
+  </div>
+</BaseLayout>

@@ -45,6 +45,7 @@ const jsonLd = {
     <meta property="og:url" content={canonical} />
     <Font cssVariable="--font-heebo" preload />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
   </head>
   <body class="min-h-dvh bg-bg">
     <a href="#main" class="btn btn-gold absolute start-3 top-3 z-50 -translate-y-24 focus:translate-y-0">דילוג לתוכן</a>

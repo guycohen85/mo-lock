@@ -3,21 +3,26 @@
 Static marketing site (type 1). Astro 7.4 builds plain HTML; no server, no database.
 
 ## Sitemap
-| Route | Status | Content |
-|---|---|---|
-| `/` | milestone 1 | hero (6 services above the fold), trust strip, services, lock types, elock, work photos, areas, reviews (placeholders), FAQ, contact + form |
-| `/thanks/` | milestone 1 | after form submit (noindex) |
-| `/404` | milestone 1 | not found |
-| `/services/` and `/services/<slug>/` | milestone 2 | one page per service; slugs in `src/data/site.ts` |
-| `/smart-locks/`, `/faq/`, `/about/`, `/contact/` | milestone 2 | |
-| `/gallery/`, `/reviews/`, `/accessibility/`, `/privacy/` | milestone 3 | |
-| `/sitemap-index.xml`, `/robots.txt` | generated | |
+Hybrid: the home page carries every section (main conversion page); separate pages only where they add search reach.
+
+| Route | Content |
+|---|---|
+| `/` | hero (6 services above the fold), trust strip, 12 service cards (8 link to pages), lock types, elock, work photos, areas, reviews (placeholders), FAQ, contact + form |
+| `/services/<id>/` | 8 pages from `src/content/services/*.md`: door-opening, car-opening, cylinders, locks-mechanisms, smart-locks, handles, peepholes, keypads-electromagnetic-locks. Hero, text, photos, optional video, FAQ, sticky call box, other services |
+| `/accessibility/`, `/privacy/` | legal pages (placeholders for owner details) |
+| `/thanks/` | after form submit (noindex) |
+| `/404` | not found |
+| `/sitemap-index.xml`, `/robots.txt` | generated |
+
+Not separate pages (sections on `/` instead): FAQ, about, contact, gallery. Electric locks, panic hardware and safes are cards only.
 
 ## Data flow
 - Calls: `tel:` links. WhatsApp: `wa.me` link with a prefilled message.
 - Contact form: plain HTML POST to Web3Forms (`https://api.web3forms.com/submit`), which emails the client's inbox and redirects to `/thanks/`. Works without JavaScript. Spam: Web3Forms honeypot (`botcheck`). Nothing is stored on our side.
 - Business details, services, areas and FAQ: `src/data/site.ts` (single source).
-- Structured data: `Locksmith` JSON-LD in `BaseLayout` (no address or hours, by client request).
+- Structured data: `Locksmith` JSON-LD in `BaseLayout` (no address or hours, by client request); `Service` JSON-LD on each service page.
+- Service pages: content collection `services` (`src/content.config.ts`); `cards` in frontmatter maps home cards to the page.
+- Video: `public/videos/` (served as-is, `preload="none"`, poster from the matching photo).
 
 ## External services
 | Service | Purpose | Notes |

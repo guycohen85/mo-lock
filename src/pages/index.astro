@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import CtaButtons from '../components/CtaButtons.astro';
@@ -16,6 +17,10 @@ import gateKeypadImg from '../assets/images/gate-keypad.jpg';
 import handleImg from '../assets/images/handle-with-thumbturn.jpg';
 import peepholeImg from '../assets/images/digital-peephole.jpg';
 import safeImg from '../assets/images/safe-keypad.jpg';
+
+// card slug -> service page URL (only services that have their own page)
+const pageFor = new Map<string, string>();
+for (const p of await getCollection('services')) for (const c of p.data.cards) pageFor.set(c, `/services/${p.id}/`);
 
 const work = [
   { img: cylinderImg, caption: 'החלפת צילינדר בדלת כניסה', alt: 'צילינדר חדש עם מפתח, מותקן בדלת כניסה' },
@@ -84,15 +89,22 @@ const trust = [
     <div class="mx-auto max-w-site px-5">
       <SectionHead id="services" title="השירותים שלנו" subtitle="לבתים פרטיים, ועדי בתים, קבלנים ובתי עסק" />
       <ul class="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-        {services.map((s) => (
-          <li class="grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-1 rounded-card border border-line bg-card p-4 sm:grid-cols-1 sm:gap-3 sm:px-5 sm:py-6">
-            <span class="row-span-2 grid size-11 place-items-center rounded-full border-[1.5px] border-gold text-gold-light sm:row-span-1 sm:size-13">
-              <Icon name={s.icon} class="size-5.5 sm:size-6.5" />
-            </span>
-            <h3 class="text-lg font-bold">{s.title}</h3>
-            <p class="text-[0.93rem] text-muted">{s.summary}</p>
-          </li>
-        ))}
+        {services.map((s) => {
+          const href = pageFor.get(s.slug);
+          const Tag = href ? 'a' : 'div';
+          return (
+            <li>
+              <Tag href={href} class:list={['grid h-full grid-cols-[auto_1fr] items-start gap-x-4 gap-y-1 rounded-card border border-line bg-card p-4 sm:grid-cols-1 sm:content-start sm:gap-3 sm:px-5 sm:py-6', href && 'transition-colors hover:border-gold/60']}>
+                <span class="row-span-3 grid size-11 place-items-center rounded-full border-[1.5px] border-gold text-gold-light sm:row-span-1 sm:size-13">
+                  <Icon name={s.icon} class="size-5.5 sm:size-6.5" />
+                </span>
+                <h3 class="text-lg font-bold">{s.title}</h3>
+                <p class="text-[0.93rem] text-muted">{s.summary}</p>
+                {href && <span class="text-sm font-medium text-gold-light" aria-hidden="true">לפרטים ←</span>}
+              </Tag>
+            </li>
+          );
+        })}
       </ul>
       <div class="mt-10 text-center">
         <h3 class="mb-3.5 text-xl font-bold">התקנה ופריצה לכל סוגי הדלתות והמנעולים</h3>
@@ -111,7 +123,7 @@ const trust = [
         <h2 id="smart-locks" class="mb-3.5 text-section font-black"><span class="text-silver">מנעול חכם.</span> <span class="text-gold">בלי מפתחות.</span></h2>
         <p class="mb-4 text-lg text-muted">התקנה מקצועית של מנעולים חכמים של elock, על ידי מתקין שעבר הדרכה והוסמך על ידי החברה. פותחים את הדלת בקוד, בטביעת אצבע או מהטלפון, לפי הדגם.</p>
         <p class="mb-7"><Missing what="דגמים, יתרונות ושאלות נפוצות על מנעולים חכמים" /></p>
-        <a class="btn btn-gold" href="#contact">הזמינו התקנה</a>
+        <div class="flex flex-wrap gap-3"><a class="btn btn-gold" href="#contact">הזמינו התקנה</a><a class="btn border border-line text-text" href="/services/smart-locks/">עוד על מנעולים חכמים</a></div>
       </div>
       <figure class="overflow-hidden rounded-photo border border-line bg-card">
         <Image src={certImg} alt="תעודת הסמכה של elock: עבר הדרכה ומוסמך להתקנת מוצרי אילוק" widths={[480, 900]} sizes="(min-width: 1024px) 440px, 100vw" class="w-full" />

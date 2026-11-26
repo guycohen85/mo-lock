@@ -19,6 +19,10 @@ const jobs = [
   ['digital-peephole-yale.jpg', 'digital-peephole.jpg', null],
   ['handle-installed-with-thumbturn-1.jpg', 'handle-with-thumbturn.jpg', null],
   ['safe-opening.jpg', 'safe-keypad.jpg', null],
+  ['thumbturn-worn-before-1.jpg', 'thumbturn-worn.jpg', null],
+  ['handle-installed-curved.jpg', 'handle-curved-installed.jpg', null],
+  ['handles-new-silver-oval-plates.jpg', 'handles-new-silver.jpg', null],
+  ['handles-new-black.jpg', 'handles-new-black.jpg', null],
 ];
 
 for (const [src, out, crop] of jobs) {
