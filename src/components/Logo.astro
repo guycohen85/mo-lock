@@ -1,0 +1,7 @@
+---
+// Redrawn client logo (see decisions.md). Use once per page: the SVG has an internal mask id.
+import Mark from '../assets/logo/mo-mark.svg';
+interface Props { class?: string }
+const { class: className = 'h-11 w-auto' } = Astro.props;
+---
+<Mark class={className} aria-hidden="true" />

@@ -1,0 +1,24 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+const nav = [
+  { href: '/#services', label: 'שירותים' },
+  { href: '/#smart-locks', label: 'מנעולים חכמים' },
+  { href: '/#work', label: 'עבודות' },
+  { href: '/#faq', label: 'שאלות ותשובות' },
+  { href: '/#contact', label: 'צור קשר' },
+];
+---
+<header class="sticky top-0 z-20 border-b border-line bg-bg/90 backdrop-blur-md">
+  <div class="mx-auto flex h-18 max-w-site items-center justify-between gap-5 px-5">
+    <a href="/" class="flex items-center" aria-label={`${site.name}, דף הבית`}>
+      <Logo />
+    </a>
+    <nav aria-label="ראשי" class="max-lg:hidden">
+      <ul class="flex gap-6 font-medium text-muted">
+        {nav.map((item) => <li><a class="transition-colors hover:text-gold-light" href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <span class="text-lg font-bold whitespace-nowrap text-gold-light max-sm:text-base">{site.tagline}</span>
+  </div>
+</header>

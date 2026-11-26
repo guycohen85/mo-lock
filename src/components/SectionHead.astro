@@ -1,0 +1,9 @@
+---
+interface Props { title: string; subtitle?: string; id?: string }
+const { title, subtitle, id } = Astro.props;
+---
+<div class="mb-11 text-center">
+  <h2 id={id} class="text-section font-black text-gold">{title}</h2>
+  {subtitle && <p class="mt-2.5 text-lg text-muted">{subtitle}</p>}
+  <div class="mx-auto mt-3.5 h-0.75 w-17.5 bg-[linear-gradient(90deg,transparent,var(--color-gold),transparent)]" aria-hidden="true"></div>
+</div>

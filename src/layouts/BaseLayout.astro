@@ -1,0 +1,58 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import { site, areas } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// No street address or hours: the client asked not to publish them.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Locksmith',
+  name: site.name,
+  url: new URL('/', Astro.site).href,
+  telephone: site.phoneE164,
+  areaServed: areas.map((name) => ({ '@type': 'Place', name })),
+  knowsAbout: ['פריצת דלתות', 'פריצת רכבים', 'החלפת צילינדר', 'מנעולים חכמים', 'קודנים', 'אלקטרו־מגנט'],
+};
+---
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0b0b0c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <Font cssVariable="--font-heebo" preload />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-dvh bg-bg">
+    <a href="#main" class="btn btn-gold absolute start-3 top-3 z-50 -translate-y-24 focus:translate-y-0">דילוג לתוכן</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCallBar />
+  </body>
+</html>

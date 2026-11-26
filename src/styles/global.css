@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Design tokens: the only colors, fonts, radii and shadows the site may use. See DESIGN.md. */
+@theme {
+  --color-*: initial;
+  --color-bg: oklch(15% 0.002 286);
+  --color-bg-2: oklch(19.2% 0.004 286);
+  --color-card: oklch(21% 0.006 286);
+  --color-line: oklch(28.7% 0.007 286);
+  --color-field: oklch(16.9% 0.004 286);
+  --color-field-line: oklch(52% 0.01 286);
+  --color-text: oklch(96.1% 0.001 286);
+  --color-muted: oklch(72.7% 0.01 286);
+  --color-silver: oklch(84.5% 0.009 265);
+  --color-gold: oklch(75.3% 0.127 85);
+  --color-gold-light: oklch(87.3% 0.114 89);
+  --color-gold-dark: oklch(58.7% 0.105 81);
+  --color-ink: oklch(17.8% 0 0);
+  --color-wa: oklch(76.1% 0.201 150);
+  --color-wa-ink: oklch(24.8% 0.063 149);
+  --color-missing: oklch(80.7% 0.137 86);
+  --color-missing-bg: oklch(75.3% 0.127 85 / 0.12);
+
+  --font-sans: var(--font-heebo), system-ui, sans-serif;
+
+  --text-display: clamp(2.3rem, 5vw, 3.8rem);
+  --text-display--line-height: 1.1;
+  --text-section: clamp(1.8rem, 3.5vw, 2.6rem);
+  --text-section--line-height: 1.2;
+  --text-phone: clamp(2rem, 4.5vw, 3rem);
+  --text-phone--line-height: 1.1;
+
+  --radius-field: 0.625rem;
+  --radius-card: 1rem;
+  --radius-photo: 1.5rem;
+
+  --shadow-cta: 0 6px 24px oklch(75.3% 0.127 85 / 0.3);
+  --shadow-photo: 0 30px 80px oklch(0% 0 0 / 0.6);
+
+  --container-site: 72.5rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-light);
+    outline-offset: 3px;
+  }
+  [id] { scroll-margin-top: 6rem; }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem;
+    border-radius: 999px; padding: 0.875rem 1.625rem;
+    font-weight: 700; font-size: 1.05rem; white-space: nowrap;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-gold {
+    background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold));
+    color: var(--color-ink); box-shadow: var(--shadow-cta);
+  }
+  .btn-wa { background: var(--color-wa); color: var(--color-wa-ink); }
+}

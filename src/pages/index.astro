@@ -1,0 +1,195 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaButtons from '../components/CtaButtons.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Missing from '../components/Missing.astro';
+import { site, areas, heroServices, services, lockTypes, faqs } from '../data/site';
+
+import heroImg from '../assets/images/smart-lock-installed.jpg';
+import certImg from '../assets/images/elock-certificate.jpg';
+import cylinderImg from '../assets/images/cylinder-installation.jpg';
+import gateLockImg from '../assets/images/gate-electromagnetic-lock.jpg';
+import gateKeypadImg from '../assets/images/gate-keypad.jpg';
+import handleImg from '../assets/images/handle-with-thumbturn.jpg';
+import peepholeImg from '../assets/images/digital-peephole.jpg';
+import safeImg from '../assets/images/safe-keypad.jpg';
+
+const work = [
+  { img: cylinderImg, caption: 'החלפת צילינדר בדלת כניסה', alt: 'צילינדר חדש עם מפתח, מותקן בדלת כניסה' },
+  { img: gateLockImg, caption: 'מנעול אלקטרו־מגנט לשער', alt: 'מנעול אלקטרו־מגנט מותקן על שער מתכת' },
+  { img: gateKeypadImg, caption: 'קודן לשער', alt: 'קודן מתכתי מותקן על עמוד של שער' },
+  { img: handleImg, caption: 'ידית עם נעילה לדלת פנים', alt: 'ידית ניקל מותקנת עם נעילה עגולה מתחתיה' },
+  { img: peepholeImg, caption: 'עינית דיגיטלית עם מסך', alt: 'עינית דיגיטלית עם מסך ומצלמה, לפני התקנה' },
+  { img: safeImg, caption: 'מנעול כספת', alt: 'דלת כספת עם מקלדת ספרות ומנעול' },
+];
+
+const trust = [
+  { icon: 'award', title: 'מנעולן מוסמך', sub: 'תעודה מקצועית' },
+  { icon: 'finger', title: 'מתקין מורשה elock', sub: 'מנעולים חכמים' },
+  { icon: 'shield', title: 'אחריות שנה', sub: 'על ההתקנה' },
+  { icon: 'tag', title: 'מחיר הוגן', sub: 'הצעת מחיר בטלפון או בוואטסאפ' },
+] as const;
+---
+<BaseLayout
+  title="מנעולן מוסמך בשפלה ובמרכז | M.O שירותי מנעולנות"
+  description="מנעולן מוסמך ומתקין מורשה elock: פריצת דלתות ורכבים, החלפת צילינדרים ומנגנונים, מנעולים חכמים, ידיות ועיניות דיגיטליות. שירות ביבנה, אשדוד, רחובות ובכל השפלה והמרכז."
+>
+  <!-- Hero: services above the fold (client request) -->
+  <section class="relative overflow-hidden py-10 lg:pt-18 lg:pb-20 bg-[radial-gradient(800px_400px_at_85%_0%,oklch(75.3%_0.127_85/0.16),transparent_60%)]">
+    <div class="mx-auto grid max-w-site items-center gap-12 px-5 lg:grid-cols-[1.15fr_.85fr]">
+      <div>
+        <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 px-3.5 py-1.5 text-sm font-medium text-gold-light">
+          <Icon name="award" class="size-4.5" /> מנעולן מוסמך · {site.warranty}
+        </p>
+        <h1 class="mb-6 text-display font-black">
+          <span class="text-silver">מנעולן מוסמך</span><br />
+          <span class="text-gold">בכל אזור {site.region}</span>
+        </h1>
+        <ul class="mb-8 grid gap-x-6 gap-y-2.5 sm:grid-cols-2" aria-label="השירותים העיקריים">
+          {heroServices.map((s) => (
+            <li class="flex items-start gap-2.5 text-[1.08rem] leading-snug font-medium">
+              <Icon name={s.icon} class="mt-px size-5.5 shrink-0 text-gold" />
+              <span>{s.title}{s.note && <small class="block text-sm text-gold-light">{s.note}</small>}</span>
+            </li>
+          ))}
+        </ul>
+        <CtaButtons />
+      </div>
+      <div class="relative aspect-16/11 overflow-hidden rounded-photo border border-gold/35 shadow-photo lg:aspect-4/5">
+        <Image src={heroImg} alt="מנעול חכם עם טביעת אצבע וקודן, מותקן על דלת" widths={[480, 820]} sizes="(min-width: 1024px) 420px, 100vw" class="size-full object-cover" loading="eager" fetchpriority="high" />
+        <p class="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-[0.875rem] border border-line bg-bg/85 px-4 py-3 backdrop-blur-sm">
+          <Icon name="shield" class="size-5.5 text-gold" /><span><b class="text-gold-light">אחריות שנה</b> על כל התקנה</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <div class="border-y border-line bg-bg-2">
+    <ul class="mx-auto grid max-w-site grid-cols-2 px-5 lg:grid-cols-4">
+      {trust.map((t, i) => (
+        <li class:list={['flex items-center gap-3.5 px-3 py-5 lg:px-4.5 lg:py-6', i % 2 === 1 && 'border-s border-line', i >= 2 && 'max-lg:border-t lg:border-s']}>
+          <Icon name={t.icon} class="size-8.5 shrink-0 text-gold" />
+          <div><b class="block">{t.title}</b><small class="text-sm text-muted">{t.sub}</small></div>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Services -->
+  <section class="py-15 lg:py-21" aria-labelledby="services">
+    <div class="mx-auto max-w-site px-5">
+      <SectionHead id="services" title="השירותים שלנו" subtitle="לבתים פרטיים, ועדי בתים, קבלנים ובתי עסק" />
+      <ul class="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        {services.map((s) => (
+          <li class="grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-1 rounded-card border border-line bg-card p-4 sm:grid-cols-1 sm:gap-3 sm:px-5 sm:py-6">
+            <span class="row-span-2 grid size-11 place-items-center rounded-full border-[1.5px] border-gold text-gold-light sm:row-span-1 sm:size-13">
+              <Icon name={s.icon} class="size-5.5 sm:size-6.5" />
+            </span>
+            <h3 class="text-lg font-bold">{s.title}</h3>
+            <p class="text-[0.93rem] text-muted">{s.summary}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-10 text-center">
+        <h3 class="mb-3.5 text-xl font-bold">התקנה ופריצה לכל סוגי הדלתות והמנעולים</h3>
+        <ul class="mx-auto flex max-w-240 flex-wrap justify-center gap-2">
+          {lockTypes.map((t) => <li class="rounded-full border border-line px-3.5 py-1.5 text-[0.95rem] text-muted">{t}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- elock -->
+  <section class="bg-[linear-gradient(180deg,var(--color-bg-2),var(--color-bg))] py-15 lg:py-21" aria-labelledby="smart-locks">
+    <div class="mx-auto grid max-w-site items-center gap-14 px-5 lg:grid-cols-[1.2fr_.8fr]">
+      <div>
+        <p class="mb-5 inline-flex rounded-full border border-gold/40 px-3.5 py-1.5 text-sm font-medium text-gold-light">מתקין מורשה elock</p>
+        <h2 id="smart-locks" class="mb-3.5 text-section font-black"><span class="text-silver">מנעול חכם.</span> <span class="text-gold">בלי מפתחות.</span></h2>
+        <p class="mb-4 text-lg text-muted">התקנה מקצועית של מנעולים חכמים של elock, על ידי מתקין שעבר הדרכה והוסמך על ידי החברה. פותחים את הדלת בקוד, בטביעת אצבע או מהטלפון, לפי הדגם.</p>
+        <p class="mb-7"><Missing what="דגמים, יתרונות ושאלות נפוצות על מנעולים חכמים" /></p>
+        <a class="btn btn-gold" href="#contact">הזמינו התקנה</a>
+      </div>
+      <figure class="overflow-hidden rounded-photo border border-line bg-card">
+        <Image src={certImg} alt="תעודת הסמכה של elock: עבר הדרכה ומוסמך להתקנת מוצרי אילוק" widths={[480, 900]} sizes="(min-width: 1024px) 440px, 100vw" class="w-full" />
+        <figcaption class="px-4 py-3 text-sm text-muted">תעודת ההסמכה מ־elock</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="py-15 lg:py-21" aria-labelledby="work">
+    <div class="mx-auto max-w-site px-5">
+      <SectionHead id="work" title="מהעבודות שלנו" />
+      <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+        {work.map((w) => (
+          <li>
+            <figure class="overflow-hidden rounded-card border border-line bg-card">
+              <Image src={w.img} alt={w.alt} widths={[320, 640]} sizes="(min-width: 768px) 360px, 50vw" class="aspect-4/5 w-full object-cover" />
+              <figcaption class="px-3 py-2.5 text-sm font-medium">{w.caption}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Areas -->
+  <section class="py-15 lg:py-21 bg-bg-2" aria-labelledby="areas">
+    <div class="mx-auto max-w-site px-5">
+      <SectionHead id="areas" title="אזורי שירות" subtitle={`נותנים שירות בכל אזור ${site.region}, בין השאר:`} />
+      <ul class="mx-auto flex max-w-225 flex-wrap justify-center gap-2.5">
+        {areas.map((a) => <li class="rounded-full border border-line bg-card px-4.5 py-2 font-medium">{a}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="py-15 lg:py-21" aria-labelledby="reviews">
+    <div class="mx-auto max-w-site px-5">
+      <SectionHead id="reviews" title="לקוחות ממליצים" />
+      <ul class="grid gap-4 lg:grid-cols-3">
+        {[1, 2, 3].map(() => (
+          <li class="flex min-h-45 flex-col gap-2.5 rounded-card border border-dashed border-field-line bg-card p-6">
+            <Missing what="צילום מסך של המלצה" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-15 lg:py-21 bg-bg-2" aria-labelledby="faq">
+    <div class="mx-auto max-w-site px-5">
+      <SectionHead id="faq" title="שאלות נפוצות" />
+      <div class="mx-auto flex max-w-200 flex-col gap-2.5">
+        {faqs.map((f) => (
+          <details class="group rounded-xl border border-line bg-card px-5.5 py-4.5">
+            <summary class="flex cursor-pointer list-none justify-between gap-3 text-[1.05rem] font-bold [&::-webkit-details-marker]:hidden">
+              {f.q}<span class="text-2xl leading-none text-gold-light group-open:hidden" aria-hidden="true">+</span><span class="hidden text-2xl leading-none text-gold-light group-open:inline" aria-hidden="true">−</span>
+            </summary>
+            <p class="mt-2.5 text-muted">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="border-t border-line py-15 lg:py-21" aria-labelledby="contact">
+    <div class="mx-auto grid max-w-site items-start gap-12 px-5 lg:grid-cols-2">
+      <div>
+        <h2 id="contact" class="mb-3 text-section font-black"><span class="text-silver">צריכים מנעולן?</span><br /><span class="text-gold">דברו איתנו</span></h2>
+        <p class="text-lg text-muted">הכי מהיר: שיחה או וואטסאפ. אפשר גם להשאיר פרטים, ונחזור אליכם.</p>
+        <a class="my-6 inline-flex items-center gap-3 text-phone font-black text-gold" href={site.phoneHref} dir="ltr">
+          <Icon name="phone" class="size-10" />{site.phoneDisplay}
+        </a>
+        <CtaButtons />
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

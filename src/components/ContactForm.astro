@@ -1,0 +1,40 @@
+---
+// Plain HTML POST to Web3Forms (no JS needed); Web3Forms emails the client and redirects to /thanks/.
+import Missing from './Missing.astro';
+import { services } from '../data/site';
+const key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const thanks = new URL('/thanks/', Astro.site).href;
+const field = 'rounded-field border border-field-line bg-field px-3.5 py-3 font-normal text-text';
+---
+<form action="https://api.web3forms.com/submit" method="POST" class="grid gap-4 rounded-[1.25rem] border border-line bg-card p-7">
+  {!key && <Missing what="מפתח לשירות הטפסים, הטופס עוד לא שולח" />}
+  <input type="hidden" name="access_key" value={key ?? ''} />
+  <input type="hidden" name="subject" value="פנייה חדשה מהאתר" />
+  <input type="hidden" name="from_name" value="אתר M.O שירותי מנעולנות" />
+  <input type="hidden" name="redirect" value={thanks} />
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <label class="grid gap-1.5 font-medium">שם מלא
+    <input class={field} name="שם" autocomplete="name" required />
+  </label>
+  <label class="grid gap-1.5 font-medium">טלפון
+    <input class={`${field} text-end`} name="טלפון" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required />
+  </label>
+  <label class="grid gap-1.5 font-medium">סוג השירות
+    <select class={field} name="שירות">
+      {services.map((s) => <option>{s.title}</option>)}
+      <option>אחר</option>
+    </select>
+  </label>
+  <label class="grid gap-1.5 font-medium">עיר
+    <input class={field} name="עיר" autocomplete="address-level2" />
+  </label>
+  <label class="grid gap-1.5 font-medium">פרטים נוספים
+    <textarea class={`${field} min-h-25 resize-y`} name="פרטים"></textarea>
+  </label>
+  <label class="flex items-start gap-2.5 text-sm text-muted">
+    <input type="checkbox" class="mt-1 size-4 accent-gold" required />
+    <span>אני מסכים/ה שהפרטים ישמשו רק כדי לחזור אליי בנוגע לפנייה.</span>
+  </label>
+  <button class="btn btn-gold cursor-pointer" type="submit">שליחה</button>
+</form>

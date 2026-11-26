@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props { class?: string; short?: boolean }
+const { class: className = '', short = false } = Astro.props;
+---
+<div class:list={['flex flex-wrap gap-3', className]}>
+  <a class="btn btn-gold max-sm:flex-1" href={site.phoneHref}>
+    <Icon name="phone" class="size-5.5" />{short ? 'התקשרו' : 'התקשרו עכשיו'}
+  </a>
+  <a class="btn btn-wa max-sm:flex-1" href={site.whatsappHref} rel="noopener">
+    <Icon name="whatsapp" class="size-5.5" />{short ? 'וואטסאפ' : 'שלחו וואטסאפ'}
+  </a>
+</div>
