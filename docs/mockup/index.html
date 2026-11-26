@@ -36,11 +36,9 @@
   .hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
   .logo{display:flex;align-items:center;gap:10px}
   .logo-mark{font-weight:900;font-size:1.9rem;letter-spacing:-.5px;line-height:1}
-  .logo-sub{font-size:.8rem;color:var(--muted);font-weight:500;line-height:1.1}
   nav ul{display:flex;gap:26px;list-style:none;padding:0;font-weight:500;color:var(--muted)}
   nav a:hover{color:var(--gold2)}
-  .hdr-phone{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.15rem;color:var(--gold2)}
-  .hdr-phone span{direction:ltr}
+  .hdr-tag{font-weight:700;font-size:1.1rem;color:var(--gold2);white-space:nowrap}
 
   /* hero */
   .hero{position:relative;overflow:hidden;padding:72px 0 80px;background:
@@ -50,6 +48,10 @@
   .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,168,67,.4);color:var(--gold2);border-radius:999px;padding:6px 14px;font-size:.9rem;font-weight:500;margin-bottom:20px}
   h1{font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.1;font-weight:900;margin-bottom:18px}
   .lead{color:var(--muted);font-size:1.2rem;max-width:34ch;margin-bottom:30px}
+  .hero-svc{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:4px 0 30px}
+  .hero-svc li{display:flex;align-items:flex-start;gap:10px;font-size:1.08rem;font-weight:500;line-height:1.35}
+  .hero-svc .ico{color:var(--gold);margin-top:1px}
+  .hero-svc small{display:block;color:var(--gold2);font-size:.85rem;font-weight:500}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px}
   .hero-photo{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(212,168,67,.35);aspect-ratio:4/5;box-shadow:0 30px 80px rgba(0,0,0,.6)}
   .hero-photo img{width:100%;height:100%;object-fit:cover}
@@ -80,6 +82,11 @@
   .svc h3{font-size:1.15rem;font-weight:700}
   .svc p{color:var(--muted);font-size:.93rem}
   .svc .more{margin-top:auto;color:var(--gold2);font-weight:500;font-size:.9rem}
+
+  .types{margin-top:40px;text-align:center}
+  .types h3{font-size:1.2rem;font-weight:700;margin-bottom:14px}
+  .types ul{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0;list-style:none;max-width:960px;margin-inline:auto}
+  .types li{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.95rem;color:var(--muted)}
 
   /* elock */
   .elock{background:linear-gradient(180deg,var(--bg2),var(--bg))}
@@ -134,7 +141,7 @@
     nav{display:none}
     .hero-grid,.elock-grid,.contact-grid{grid-template-columns:1fr}
     .hero{padding:40px 0 56px}
-    .hero-photo{aspect-ratio:16/11;order:-1}
+    .hero-photo{aspect-ratio:16/11}
     .svc-grid{grid-template-columns:repeat(2,1fr)}
     .trust-grid{grid-template-columns:repeat(2,1fr)}
     .trust-item:nth-child(3){border-inline-start:0}
@@ -146,11 +153,12 @@
     .mbar .btn{justify-content:center;padding:13px}
   }
   @media (max-width:560px){
-    .hdr-phone span{display:none}
     .svc-grid{grid-template-columns:1fr}
     .feat{grid-template-columns:1fr}
     .trust-item{padding:18px 12px;gap:10px}
     .cta-row .btn{flex:1;justify-content:center}
+    .hero-svc{grid-template-columns:1fr}
+    .hdr-tag{font-size:1rem}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -191,10 +199,7 @@
   <div class="wrap hdr">
     <a href="#" class="logo" aria-label="M.O שירותי מנעולנות – דף הבית">
       <svg class="ico" style="width:34px;height:34px;color:var(--gold)" aria-hidden="true"><use href="#i-key"/></svg>
-      <span>
-        <span class="logo-mark silver-text" style="direction:ltr;display:block">M.O</span>
-        <span class="logo-sub">שירותי מנעולנות</span>
-      </span>
+      <span class="logo-mark silver-text" style="direction:ltr">M.O</span>
     </a>
     <nav aria-label="ראשי">
       <ul>
@@ -205,9 +210,7 @@
         <li><a href="#contact">צור קשר</a></li>
       </ul>
     </nav>
-    <a class="hdr-phone" href="tel:0508842062" aria-label="התקשרו 050-8842062">
-      <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>050-8842062</span>
-    </a>
+    <span class="hdr-tag">שירותי מנעולנות</span>
   </div>
 </header>
 
@@ -215,9 +218,16 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow"><svg class="ico" style="width:18px;height:18px" aria-hidden="true"><use href="#i-award"/></svg> מנעולן מוסמך · מתקין רשמי elock</span>
-        <h1><span class="silver-text">מנעולן מוסמך</span><br><span class="gold-text">ביבנה, אשדוד, רחובות והסביבה</span></h1>
-        <p class="lead">פריצת דלתות ורכבים, החלפת צילינדרים, התקנת מנעולים חכמים, קודנים ועיניות. עבודה מקצועית, מחיר הוגן ואחריות לשנה על ההתקנה.</p>
+        <span class="eyebrow"><svg class="ico" style="width:18px;height:18px" aria-hidden="true"><use href="#i-award"/></svg> מנעולן מוסמך · אחריות שנה על ההתקנה</span>
+        <h1><span class="silver-text">מנעולן מוסמך</span><br><span class="gold-text">בכל אזור השפלה והמרכז</span></h1>
+        <ul class="hero-svc" aria-label="השירותים שלנו">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-door"/></svg><span>פריצת כל סוגי הדלתות והרכבים</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-cyl"/></svg><span>החלפת צילינדרים ומנעולים</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-mech"/></svg><span>החלפת מנגנונים</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-finger"/></svg><span>התקנת מנעולים חכמים<small>מתקין מורשה elock</small></span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-handle"/></svg><span>התקנה והחלפת ידיות לכל סוגי הדלתות</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-eye"/></svg><span>התקנת עיניות דיגיטליות</span></li>
+        </ul>
         <div class="cta-row">
           <a class="btn btn-gold" href="tel:0508842062"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> התקשרו עכשיו</a>
           <a class="btn btn-wa" href="https://wa.me/972508842062"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> שלחו וואטסאפ</a>
@@ -233,7 +243,7 @@
   <div class="trust">
     <div class="wrap trust-grid">
       <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-award"/></svg><div><b>מנעולן מוסמך</b><small>תעודה מקצועית</small></div></div>
-      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-finger"/></svg><div><b>מתקין רשמי elock</b><small>מנעולים חכמים</small></div></div>
+      <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-finger"/></svg><div><b>מתקין מורשה elock</b><small>מנעולים חכמים</small></div></div>
       <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><div><b>אחריות שנה</b><small>על ההתקנה</small></div></div>
       <div class="trust-item"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg><div><b>מחיר הוגן</b><small>הצעה ברורה מראש</small></div></div>
     </div>
@@ -260,6 +270,12 @@
         <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-exit"/></svg></span><h3>ידיות ודלתות בהלה</h3><p>פתרונות יציאת חירום לבתי עסק ומבני ציבור.</p><span class="more">לפרטים ←</span></a>
         <a class="svc" href="#"><span class="svc-ico"><svg aria-hidden="true"><use href="#i-safe"/></svg></span><h3>מנעול כספת</h3><p>פתיחה, תיקון והחלפה של מנעולי כספות.</p><span class="more">לפרטים ←</span></a>
       </div>
+      <div class="types">
+        <h3>התקנה ופריצה לכל סוגי הדלתות והמנעולים</h3>
+        <ul>
+          <li>דלתות רב־בריח</li><li>דלתות חוסם</li><li>דלתות זכוכית</li><li>דלתות אלומיניום</li><li>דלתות פנים</li><li>שערים</li><li>מנעול ביטחון</li><li>צילינדרים</li><li>מנגנון לדלת</li><li>מחזיר שמן (סוגר דלת)</li><li>מנעולי תיבות דואר</li><li>מנעול כספת וכספות</li><li>מנעול חשמלי</li><li>אלקטרו־מגנט</li><li>קודנים</li><li>בקרת כניסה</li><li>מנעולים חכמים</li><li>פרזול וידיות</li><li>פריצת רכבים</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -267,7 +283,7 @@
     <div class="wrap elock-grid">
       <div class="elock-photo"><img src="../../assets/from-client/smart-lock-installed.png" alt="מנעול חכם elock מותקן על דלת לבנה" loading="lazy"></div>
       <div>
-        <span class="eyebrow">מתקין רשמי elock</span>
+        <span class="eyebrow">מתקין מורשה elock</span>
         <h2><span class="silver-text">מנעול חכם.</span> <span class="gold-text">בלי מפתחות, בלי דאגות.</span></h2>
         <p class="lead">פותחים את הדלת בטביעת אצבע, בקוד, בכרטיס או מהטלפון, ונותנים גישה זמנית לאורחים ולבעלי מקצוע. התקנה מקצועית של דגמי elock Wiz ו־Pro.</p>
         <ul class="feat">
@@ -285,11 +301,11 @@
     <div class="wrap">
       <div class="sec-head">
         <h2><span class="gold-text">אזורי שירות</span></h2>
-        <p>מגיעים אליכם בכל האזור</p>
+        <p>נותנים שירות בכל אזור השפלה והמרכז, בין השאר:</p>
         <div class="divider"></div>
       </div>
       <ul class="areas">
-        <li>יבנה</li><li>אשדוד</li><li>רחובות</li><li>נס ציונה</li><li>ראשון לציון</li><li>גדרה</li><li>יישובי גדרות</li><li>מזכרת בתיה</li><li>קריית עקרון</li><li>בני דרום</li><li>פלמחים</li><li>גאליה</li><li>כפר הנגיד</li><li>בית עובד</li><li>גבעת וושינגטון</li>
+        <li>יבנה</li><li>אשדוד</li><li>רחובות</li><li>נס ציונה</li><li>ראשון לציון</li><li>גדרה</li><li>יישובי גדרות</li><li>מזכרת בתיה</li><li>קריית עקרון</li><li>בני דרום</li><li>פלמחים</li><li>גאליה</li><li>כפר הנגיד</li><li>בית עובד</li><li>גבעת וושינגטון</li><li>קבוצת יבנה</li><li>חולון</li>
       </ul>
     </div>
   </section>

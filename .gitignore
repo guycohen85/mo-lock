@@ -3,3 +3,8 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+
+# Raw client files stay local (public repo); only processed images used on the site are committed
+assets/from-client/*
+!assets/from-client/flyer.webp
+!assets/from-client/smart-lock-installed.png
